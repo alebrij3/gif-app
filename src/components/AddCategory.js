@@ -1,15 +1,19 @@
 import { useState } from 'react';
 
-const AddCategory = () => {
+const AddCategory = ({ setCategories }) => {
   const [inputValue, setInputValue] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('User tried to submit the form!');
+    if (inputValue.trim().length > 2) {
+      setCategories((categories) => [...categories, inputValue]);
+      setInputValue('');
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
       <input
         type='text'
+        name='category'
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       />
